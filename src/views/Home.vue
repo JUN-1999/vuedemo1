@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Vue3 TodoList</h1>
+    <h1>Vue3 TodoList —— by JUN</h1>
 
     <h3>
       共有<span class="text-primary">{{ list.length }}</span>
