@@ -12,8 +12,11 @@
     <h3>代办事项</h3>
     <ul class="list-group">
       <tempalte :key="index" v-for="(item, index) in list">
-        <li class="list-group-item" v-if="item.isFinish == false">
-          <div class="form-group form-check">
+        <li
+          class="list-group-item d-flex justify-content-between"
+          v-if="item.isFinish == false"
+        >
+          <div class="form-group form-check mb-0">
             <input
               type="checkbox"
               class="form-check-input"
@@ -27,9 +30,21 @@
               >{{ item.name }}</label
             >
             <label class="form-check-label" v-else>
-              <input type="text" v-model="item.name" @blur="item.isEdit = !item.isEdit" />
+              <input
+                type="text"
+                v-model="item.name"
+                @blur="item.isEdit = !item.isEdit"
+              />
             </label>
           </div>
+          <button
+            type="button"
+            @click="closeList(index)"
+            class="close"
+            aria-label="关闭"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </li>
       </tempalte>
     </ul>
@@ -98,6 +113,9 @@ export default {
       });
       state.newlistItem = "";
     };
+    const closeList = (index) => {
+      state.list.splice(index, 1);
+    };
     const state = reactive({
       newlistItem: "",
       list: [
@@ -109,6 +127,7 @@ export default {
         state.list.filter((item) => item.isFinish == true)
       ),
       addListItem,
+      closeList
     });
 
     return toRefs(state);
